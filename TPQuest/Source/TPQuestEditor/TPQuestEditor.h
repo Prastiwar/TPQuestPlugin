@@ -8,7 +8,6 @@
 #include "IAssetTools.h"
 #include "AssetToolsModule.h"
 #include "AssetTypeCategories.h"
-#include "SlateStyleRegistry.h"
 #include "SlateStyle.h"
 
 static EAssetTypeCategories::Type QuestCategory = EAssetTypeCategories::Misc;
@@ -27,13 +26,15 @@ public:
 		return QuestCategory;
 	}
 
-	/** IModuleInterface implementation */
+	// IModuleInterface implementation
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
+	////////////////////////////////////
 
 protected:
 	TSharedPtr<FSlateStyleSet> StyleSet;
 
+	// Set Class Thumbnail - Name is name of icon AND name of class
 	void SetClassThumb(FString Name);
 
 	template<class ObjectType>

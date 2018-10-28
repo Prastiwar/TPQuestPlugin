@@ -1,9 +1,8 @@
-// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/
+// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
 #pragma once
 
 #include "Factories/BlueprintFactory.h"
-#include "ObjectiveBehavior.h"
 #include "Editor/ClassViewer/Public/ClassViewerFilter.h"
 #include "ObjectiveFactory.generated.h"
 

@@ -1,4 +1,4 @@
-// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/
+// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
 #include "QuestComponent.h"
 #include "QuestData.h"

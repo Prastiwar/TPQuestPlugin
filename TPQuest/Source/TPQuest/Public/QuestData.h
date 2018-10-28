@@ -1,4 +1,4 @@
-// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/
+// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
 #pragma once
 
@@ -23,7 +23,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		TArray<TSubclassOf<UObjectiveBehavior>> ObjectiveClasses;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly)
 		TArray<UObjectiveBehavior*> Objectives;
 
 };

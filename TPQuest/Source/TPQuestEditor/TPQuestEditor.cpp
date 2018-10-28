@@ -2,6 +2,7 @@
 
 #include "TPQuestEditor.h"
 #include "IPluginManager.h"
+#include "SlateStyleRegistry.h"
 #include "ObjectiveBehaviorFATA.h"
 #include "QuestDataFATA.h"
 
@@ -9,18 +10,18 @@
 
 void FTPQuestEditorModule::StartupModule()
 {
+	// Register all Asset Type Actions
 	RegisterAssetTypeActions(new FObjectiveBehaviorFATA);
 	RegisterAssetTypeActions(new FQuestDataFATA);
 
 	FString ContentDir = IPluginManager::Get().FindPlugin("TPQuest")->GetBaseDir();
 	StyleSet = MakeShareable(new FSlateStyleSet("TPQuestStyle"));
-
-	//The image we wish to load is located inside the Resources folder inside the Base Directory
-	//so let's set the content dir to the base dir and manually switch to the Resources folder:
 	StyleSet->SetContentRoot(ContentDir);
 
+	// Set Class Thumbnails - Name is name of icon AND name of class
 	SetClassThumb(TEXT("QuestData"));
 	SetClassThumb(TEXT("ObjectiveBehavior"));
+
 	FSlateStyleRegistry::RegisterSlateStyle(*StyleSet);
 }
 

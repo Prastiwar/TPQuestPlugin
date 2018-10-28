@@ -1,4 +1,4 @@
-// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/
+// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
 #include "ObjectiveFactory.h"
 #include "TPQuestEditor.h"
@@ -28,7 +28,6 @@ bool UObjectiveFactory::ConfigureProperties()
 
 	const FText TitleText = FText::FromName(TEXT("Pick Objective Behavior Class"));
 	UClass* ChosenClass = nullptr;
-
 	const bool bPressedOk = SClassPickerDialog::PickClass(TitleText, Options, ChosenClass, UObjectiveBehavior::StaticClass());
 	if (bPressedOk)
 	{
