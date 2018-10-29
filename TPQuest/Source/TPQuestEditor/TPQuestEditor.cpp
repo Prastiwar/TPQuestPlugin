@@ -3,16 +3,18 @@
 #include "TPQuestEditor.h"
 #include "IPluginManager.h"
 #include "SlateStyleRegistry.h"
-#include "ObjectiveBehaviorFATA.h"
-#include "QuestDataFATA.h"
+#include "AssetTypeActions.h"
 
 #define LOCTEXT_NAMESPACE "FTPQuestEditorModule"
 
 void FTPQuestEditorModule::StartupModule()
 {
+	FTPQuestEditorModule::GetQuestCategory();
+
 	// Register all Asset Type Actions
 	RegisterAssetTypeActions(new FObjectiveBehaviorFATA);
 	RegisterAssetTypeActions(new FQuestDataFATA);
+	RegisterAssetTypeActions(new FQuestComponentFATA);
 
 	FString ContentDir = IPluginManager::Get().FindPlugin("TPQuest")->GetBaseDir();
 	StyleSet = MakeShareable(new FSlateStyleSet("TPQuestStyle"));
@@ -21,6 +23,7 @@ void FTPQuestEditorModule::StartupModule()
 	// Set Class Thumbnails - Name is name of icon AND name of class
 	SetClassThumb(TEXT("QuestData"));
 	SetClassThumb(TEXT("ObjectiveBehavior"));
+	SetClassThumb(TEXT("QuestComponent"));
 
 	FSlateStyleRegistry::RegisterSlateStyle(*StyleSet);
 }

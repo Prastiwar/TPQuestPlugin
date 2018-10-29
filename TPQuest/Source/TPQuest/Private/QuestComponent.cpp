@@ -12,12 +12,7 @@ UQuestComponent::UQuestComponent()
 void UQuestComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	for (auto ObjectiveClass : Quest->ObjectiveClasses)
-	{
-		UObjectiveBehavior* Objective = ObjectiveClass->GetDefaultObject<UObjectiveBehavior>();
-		Objective->Init();
-		Quest->Objectives.Add(Objective);
-	}
+	Quest->InitObjectives();
 }
 
 void UQuestComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -31,6 +26,5 @@ void UQuestComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, F
 
 void UQuestComponent::CompleteObjective(class UObjectiveBehavior* Objective)
 {
-	Objective->Complete();
 	Quest->Objectives.RemoveSingle(Objective);
 }

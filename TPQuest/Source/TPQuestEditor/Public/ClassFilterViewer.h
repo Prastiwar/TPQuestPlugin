@@ -2,24 +2,9 @@
 
 #pragma once
 
-#include "Factories/BlueprintFactory.h"
 #include "Editor/ClassViewer/Public/ClassViewerFilter.h"
-#include "ObjectiveFactory.generated.h"
 
-UCLASS()
-class TPQUESTEDITOR_API UObjectiveFactory : public UBlueprintFactory
-{
-	GENERATED_BODY()
-
-public:
-	UObjectiveFactory();
-
-	virtual bool ConfigureProperties() override;
-	virtual UObject* FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn, FName CallingContext) override;
-
-};
-
-class FObjectiveBehaviorFilterViewer : public IClassViewerFilter
+class TPQUESTEDITOR_API FClassFilterViewer : public IClassViewerFilter
 {
 public:
 	TSet<const UClass*> AllowedChildrenOfClasses;

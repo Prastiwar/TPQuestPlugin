@@ -4,7 +4,6 @@
 
 #include "Modules/ModuleManager.h"
 #include "TPQuestPrivatePCH.h"
-#include "QuestFactory.h"
 #include "IAssetTools.h"
 #include "AssetToolsModule.h"
 #include "AssetTypeCategories.h"

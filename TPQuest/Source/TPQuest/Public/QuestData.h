@@ -26,4 +26,7 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 		TArray<UObjectiveBehavior*> Objectives;
 
+	UFUNCTION(BlueprintCallable)
+		void InitObjectives();
+
 };

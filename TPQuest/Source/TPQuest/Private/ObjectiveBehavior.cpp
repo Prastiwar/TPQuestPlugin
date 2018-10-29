@@ -29,6 +29,7 @@ void UObjectiveBehavior::Tick(float DeltaTime, UQuestComponent* QuestOwner)
 	Execute(DeltaTime, QuestOwner);
 	if (IsCompleted())
 	{
+		Complete();
 		QuestOwner->CompleteObjective(this);
 	}
 }

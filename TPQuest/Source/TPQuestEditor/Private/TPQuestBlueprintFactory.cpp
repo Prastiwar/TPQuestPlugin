@@ -1,34 +1,32 @@
 // Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
-#include "ObjectiveFactory.h"
+#include "TPQuestBlueprintFactory.h"
 #include "TPQuestEditor.h"
 #include "KismetCompilerModule.h"
 #include "KismetEditorUtilities.h"
 #include "Editor/UnrealEd/Public/Kismet2/SClassPickerDialog.h"
-#include "ObjectiveBehavior.h"
+#include "ClassFilterViewer.h"
 
-UObjectiveFactory::UObjectiveFactory()
+UTPQuestBlueprintFactory::UTPQuestBlueprintFactory()
 {
 	bCreateNew = true;
 	bEditAfterNew = true;
-	SupportedClass = UObjectiveBehavior::StaticClass();
 }
 
-bool UObjectiveFactory::ConfigureProperties()
+bool UTPQuestBlueprintFactory::ConfigureProperties()
 {
 	ParentClass = nullptr;
 
-	TSharedPtr<FObjectiveBehaviorFilterViewer> Filter = MakeShareable<FObjectiveBehaviorFilterViewer>(new FObjectiveBehaviorFilterViewer);
+	TSharedPtr<FClassFilterViewer> Filter = MakeShareable<FClassFilterViewer>(new FClassFilterViewer);
 	Filter->DisallowedClassFlags = CLASS_Abstract | CLASS_Deprecated;
-	Filter->AllowedChildrenOfClasses.Add(UObjectiveBehavior::StaticClass());
+	Filter->AllowedChildrenOfClasses.Add(SupportedClass);
 	
 	FClassViewerInitializationOptions Options;
 	Options.Mode = EClassViewerMode::ClassPicker;
 	Options.ClassFilter = Filter;
 
-	const FText TitleText = FText::FromName(TEXT("Pick Objective Behavior Class"));
 	UClass* ChosenClass = nullptr;
-	const bool bPressedOk = SClassPickerDialog::PickClass(TitleText, Options, ChosenClass, UObjectiveBehavior::StaticClass());
+	const bool bPressedOk = SClassPickerDialog::PickClass(TitleText, Options, ChosenClass, SupportedClass);
 	if (bPressedOk)
 	{
 		ParentClass = ChosenClass;
@@ -36,7 +34,7 @@ bool UObjectiveFactory::ConfigureProperties()
 	return bPressedOk;
 }
 
-UObject* UObjectiveFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn, FName CallingContext)
+UObject* UTPQuestBlueprintFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn, FName CallingContext)
 {
 	if (ParentClass && FKismetEditorUtilities::CanCreateBlueprintOfClass(ParentClass))
 	{
