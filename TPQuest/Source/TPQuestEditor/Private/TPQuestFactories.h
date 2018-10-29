@@ -3,19 +3,19 @@
 #pragma once
 
 #include "AssetTypeActions.h"
-#include "TPQuestFactory.h"
 #include "TPQuestBlueprintFactory.h"
 #include "TPQuestFactories.generated.h"
 
 UCLASS()
-class TPQUESTEDITOR_API UQuestFactory : public UTPQuestFactory
+class TPQUESTEDITOR_API UQuestFactory : public UTPQuestBlueprintFactory
 {
 	GENERATED_BODY()
 
 public:
 	UQuestFactory()
 	{
-		SupportedClass = UQuestData::StaticClass();
+		TitleText = FText::FromName(TEXT("Pick Quest Class"));
+		SupportedClass = UQuest::StaticClass();
 	}
 };
 

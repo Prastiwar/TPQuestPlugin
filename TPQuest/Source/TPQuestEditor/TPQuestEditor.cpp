@@ -13,7 +13,7 @@ void FTPQuestEditorModule::StartupModule()
 
 	// Register all Asset Type Actions
 	RegisterAssetTypeActions(new FObjectiveBehaviorFATA);
-	RegisterAssetTypeActions(new FQuestDataFATA);
+	RegisterAssetTypeActions(new FQuestFATA);
 	RegisterAssetTypeActions(new FQuestComponentFATA);
 
 	FString ContentDir = IPluginManager::Get().FindPlugin("TPQuest")->GetBaseDir();
@@ -21,7 +21,7 @@ void FTPQuestEditorModule::StartupModule()
 	StyleSet->SetContentRoot(ContentDir);
 
 	// Set Class Thumbnails - Name is name of icon AND name of class
-	SetClassThumb(TEXT("QuestData"));
+	SetClassThumb(TEXT("Quest"));
 	SetClassThumb(TEXT("ObjectiveBehavior"));
 	SetClassThumb(TEXT("QuestComponent"));
 

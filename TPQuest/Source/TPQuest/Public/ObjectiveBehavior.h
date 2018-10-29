@@ -5,6 +5,14 @@
 #include "Object.h"
 #include "ObjectiveBehavior.generated.h"
 
+UENUM(BlueprintType)
+enum class EObjectiveResult : uint8
+{
+	Succeed,
+	InProgress,
+	Failed
+};
+
 UCLASS(Blueprintable, BlueprintType)
 class TPQUEST_API UObjectiveBehavior : public UObject
 {
@@ -13,45 +21,40 @@ class TPQUEST_API UObjectiveBehavior : public UObject
 public:
 	UObjectiveBehavior();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = Quest)
 		void AddProgress(int32 Progress);
 
-	UFUNCTION(BlueprintCallable)
-		bool IsCompleted() const;
-
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = Quest)
 		float GetNormalizedProgress() const;
-
-	void Tick(float DeltaTime, UQuestComponent* QuestOwner);
 
 	virtual void Init() { ReceiveInit(); }
 
 	// Called after Objective is completed and going to be removed from Quest
-	virtual void Complete() { ReceiveComplete(); }
+	virtual void Complete(const bool bSucceed) { ReceiveComplete(bSucceed); }
+
+	virtual EObjectiveResult Execute(float DeltaTime, UQuest* Owner, UQuestComponent* QuestOwner) { return ReceiveExecute(DeltaTime, Owner, QuestOwner); }
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Quest)
 		FName Name;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Quest)
 		FText Description;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Quest)
 		int32 NeededProgress;
 
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Quest)
 		int32 CurrentProgress;
 
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Init"))
 		void ReceiveInit();
 
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Execute"))
-		void ReceiveExecute(float DeltaTime, UQuestComponent* QuestOwner);
-
 	// Called after Objective is completed and going to be removed from Quest
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Complete"))
-		void ReceiveComplete();
+		void ReceiveComplete(const bool bSucceed);
 
-	virtual void Execute(float DeltaTime, UQuestComponent* QuestOwner) { ReceiveExecute(DeltaTime, QuestOwner); }
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Execute"))
+		EObjectiveResult ReceiveExecute(float DeltaTime, UQuest* Owner, UQuestComponent* QuestOwner);
 
 };

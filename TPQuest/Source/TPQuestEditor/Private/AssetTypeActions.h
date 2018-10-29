@@ -4,19 +4,19 @@
 
 #include "AssetTypeActions_TPQuest.h"
 #include "TPQuestEditor.h"
-#include "QuestData.h"
+#include "Quest.h"
 #include "ObjectiveBehavior.h"
 #include "QuestComponent.h"
 
-class TPQUESTEDITOR_API FQuestDataFATA : public FAssetTypeActions_TPQuest
+class TPQUESTEDITOR_API FQuestFATA : public FAssetTypeActions_TPQuest
 {
 public:
-	FQuestDataFATA()
+	FQuestFATA()
 	{
-		Name = FText::FromName(TEXT("Quest Data Asset"));
+		Name = FText::FromName(TEXT("Quest Blueprint"));
 		Description = FText::FromName(TEXT("Quest Data Asset holds all information about quest and his objectives"));
 		Color = FColor(255, 70, 70);
-		SupportedClass = UQuestData::StaticClass();
+		SupportedClass = UQuest::StaticClass();
 	}
 };
 

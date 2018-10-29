@@ -1,7 +1,6 @@
 // Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
 #include "QuestComponent.h"
-#include "QuestData.h"
 #include "ObjectiveBehavior.h"
 
 UQuestComponent::UQuestComponent()
@@ -12,19 +11,40 @@ UQuestComponent::UQuestComponent()
 void UQuestComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	Quest->InitObjectives();
 }
 
 void UQuestComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	for (int32 Index = Quest->Objectives.Num() - 1; Index >= 0; Index--)
+
+	for (int32 QuestIndex = Quests.Num() - 1; QuestIndex >= 0; QuestIndex--)
 	{
-		Quest->Objectives[Index]->Tick(DeltaTime, this);
+		bool bQuestCompleted = true;
+
+		for (int32 ObjectiveIndex = Quests[QuestIndex]->Objectives.Num() - 1; ObjectiveIndex >= 0; ObjectiveIndex--)
+		{
+			EObjectiveResult Result = Quests[QuestIndex]->Objectives[ObjectiveIndex]->Execute(DeltaTime, Quests[QuestIndex], this);
+			if (Result == EObjectiveResult::InProgress)
+			{
+				bQuestCompleted = false;
+			}
+			else
+			{
+				Quests[QuestIndex]->Objectives[ObjectiveIndex]->Complete(Result == EObjectiveResult::Succeed);
+				Quests[QuestIndex]->Objectives.RemoveAtSwap(ObjectiveIndex);
+			}
+		}
+
+		if (bQuestCompleted && !Quests[QuestIndex]->IsCompleted())
+		{
+			Quests[QuestIndex]->Complete(true);
+			Quests.RemoveAtSwap(QuestIndex);
+		}
 	}
 }
 
-void UQuestComponent::CompleteObjective(class UObjectiveBehavior* Objective)
+void UQuestComponent::AddQuest(UQuest* Quest)
 {
-	Quest->Objectives.RemoveSingle(Objective);
+	Quest->Begin();
+	Quests.Add(Quest);
 }

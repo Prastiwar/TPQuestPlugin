@@ -1,12 +1,24 @@
 // Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
-#include "QuestData.h"
+#include "Quest.h"
 
-UQuestData::UQuestData()
+UQuest::UQuest()
 {
 }
 
-void UQuestData::InitObjectives()
+void UQuest::Begin()
+{
+	ReceiveBegin();
+	InitObjectives();
+}
+
+void UQuest::Complete(const bool bSucceeded)
+{
+	ReceiveComplete(bSucceeded);
+	bIsCompleted = true;
+}
+
+void UQuest::InitObjectives()
 {
 	Objectives.Empty();
 	for (TSubclassOf<UObjectiveBehavior> ObjectiveClass : ObjectiveClasses)

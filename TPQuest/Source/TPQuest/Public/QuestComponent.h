@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "Quest.h"
 #include "QuestComponent.generated.h"
 
 UCLASS(Blueprintable, BlueprintType)
@@ -13,13 +14,14 @@ class TPQUEST_API UQuestComponent : public UActorComponent
 public:
 	UQuestComponent();
 
-	UFUNCTION(BlueprintCallable)
-		void CompleteObjective(class UObjectiveBehavior* Objective);
+	UFUNCTION(BlueprintCallable, Category = Quest)
+		void AddQuest(UQuest* Quest);
 
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-		class UQuestData* Quest;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Quest)
+		TArray<UQuest*> Quests;
 
 	virtual void BeginPlay() override;
+
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 };
