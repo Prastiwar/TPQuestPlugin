@@ -5,11 +5,14 @@
 #include "Object.h"
 #include "ObjectiveBehavior.generated.h"
 
+class UQuest;
+class UQuestComponent;
+
 UENUM(BlueprintType)
 enum class EObjectiveResult : uint8
 {
-	Succeed,
 	InProgress,
+	Succeed,
 	Failed
 };
 
@@ -27,12 +30,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Quest)
 		float GetNormalizedProgress() const;
 
-	virtual void Init() { ReceiveInit(); }
-
 	// Called after Objective is completed and going to be removed from Quest
-	virtual void Complete(const bool bSucceed) { ReceiveComplete(bSucceed); }
+	UFUNCTION(BlueprintCallable, Category = Quest)
+		void Complete(const bool bSucceed);
 
-	virtual EObjectiveResult Execute(float DeltaTime, UQuest* Owner, UQuestComponent* QuestOwner) { return ReceiveExecute(DeltaTime, Owner, QuestOwner); }
+	virtual void Init();
+
+	virtual EObjectiveResult Execute(UQuest* Owner, UQuestComponent* QuestOwner, float DeltaTime);
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Quest)
@@ -50,11 +54,17 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Init"))
 		void ReceiveInit();
 
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Execute"))
+		void ReceiveExecute(UQuest* Owner, UQuestComponent* QuestOwner, float DeltaTime);
+
 	// Called after Objective is completed and going to be removed from Quest
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Complete"))
 		void ReceiveComplete(const bool bSucceed);
 
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Execute"))
-		EObjectiveResult ReceiveExecute(float DeltaTime, UQuest* Owner, UQuestComponent* QuestOwner);
+	// Called after Objective is completed and going to be removed from Quest
+	virtual void CompleteImpl(const bool bSucceed) { ReceiveComplete(bSucceed); }
+
+private:
+	EObjectiveResult CurrentResult;
 
 };

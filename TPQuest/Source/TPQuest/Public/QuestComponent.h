@@ -3,8 +3,9 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "Quest.h"
 #include "QuestComponent.generated.h"
+
+class UQuest;
 
 UCLASS(Blueprintable, BlueprintType)
 class TPQUEST_API UQuestComponent : public UActorComponent

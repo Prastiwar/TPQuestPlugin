@@ -3,8 +3,9 @@
 #pragma once
 
 #include "Object.h"
-#include "ObjectiveBehavior.h"
 #include "Quest.generated.h"
+
+class UObjectiveBehavior;
 
 UCLASS(Blueprintable, BlueprintType)
 class TPQUEST_API UQuest : public UObject

@@ -1,6 +1,7 @@
 // Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
 #include "QuestComponent.h"
+#include "Quest.h"
 #include "ObjectiveBehavior.h"
 
 UQuestComponent::UQuestComponent()
@@ -23,14 +24,13 @@ void UQuestComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, F
 
 		for (int32 ObjectiveIndex = Quests[QuestIndex]->Objectives.Num() - 1; ObjectiveIndex >= 0; ObjectiveIndex--)
 		{
-			EObjectiveResult Result = Quests[QuestIndex]->Objectives[ObjectiveIndex]->Execute(DeltaTime, Quests[QuestIndex], this);
+			EObjectiveResult Result = Quests[QuestIndex]->Objectives[ObjectiveIndex]->Execute(Quests[QuestIndex], this, DeltaTime);
 			if (Result == EObjectiveResult::InProgress)
 			{
 				bQuestCompleted = false;
 			}
 			else
 			{
-				Quests[QuestIndex]->Objectives[ObjectiveIndex]->Complete(Result == EObjectiveResult::Succeed);
 				Quests[QuestIndex]->Objectives.RemoveAtSwap(ObjectiveIndex);
 			}
 		}

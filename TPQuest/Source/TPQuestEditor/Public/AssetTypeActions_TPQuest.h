@@ -7,7 +7,6 @@
 
 class TPQUESTEDITOR_API FAssetTypeActions_TPQuest : public FAssetTypeActions_Base
 {
-
 public:
 	FAssetTypeActions_TPQuest()
 	{
@@ -16,10 +15,10 @@ public:
 		FColor Color = FColor(255, 255, 255);
 	}
 
-    virtual FText GetName() const override { return Name; }
+	virtual FText GetName() const override { return FText::FromName(TEXT("TPQuest Asset")); }
+	virtual FText GetAssetDescription(const FAssetData &AssetData) const override { return Description; }
     virtual uint32 GetCategories() override { return FTPQuestEditorModule::GetQuestCategory(); }
     virtual FColor GetTypeColor() const override { return Color; }
-    virtual FText GetAssetDescription(const FAssetData &AssetData) const override { return Description; }
     virtual UClass* GetSupportedClass() const override { return SupportedClass; }
 
 protected:
