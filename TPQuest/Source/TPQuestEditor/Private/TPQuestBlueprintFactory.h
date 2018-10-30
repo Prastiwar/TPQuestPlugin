@@ -12,10 +12,14 @@ class TPQUESTEDITOR_API UTPQuestBlueprintFactory : public UBlueprintFactory
 public:
 	UTPQuestBlueprintFactory();
 
+	virtual FText GetDisplayName() const override;
+
 	virtual bool ConfigureProperties() override;
+
 	virtual UObject* FactoryCreateNew(
 		UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn, FName CallingContext) override;
 
 protected:
 	FText TitleText;
+
 };

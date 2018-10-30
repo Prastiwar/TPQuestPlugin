@@ -25,16 +25,16 @@ public:
 	UObjectiveBehavior();
 
 	UFUNCTION(BlueprintCallable, Category = Quest)
-		void AddProgress(int32 Progress);
+		void AddProgress(int32 Progress) { CurrentProgress += Progress; }
 
 	UFUNCTION(BlueprintCallable, Category = Quest)
-		float GetNormalizedProgress() const;
+		float GetNormalizedProgress() const { return (float)CurrentProgress / (float)NeededProgress; }
 
 	// Called after Objective is completed and going to be removed from Quest
 	UFUNCTION(BlueprintCallable, Category = Quest)
 		void Complete(const bool bSucceed);
 
-	virtual void Init();
+	virtual void Begin();
 
 	virtual EObjectiveResult Execute(UQuest* Owner, UQuestComponent* QuestOwner, float DeltaTime);
 
@@ -48,11 +48,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Quest)
 		int32 NeededProgress;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Quest)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Quest)
 		int32 CurrentProgress;
 
+	EObjectiveResult CurrentResult;
+
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Init"))
-		void ReceiveInit();
+		void ReceiveBegin();
 
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "Execute"))
 		void ReceiveExecute(UQuest* Owner, UQuestComponent* QuestOwner, float DeltaTime);
@@ -63,8 +65,5 @@ protected:
 
 	// Called after Objective is completed and going to be removed from Quest
 	virtual void CompleteImpl(const bool bSucceed) { ReceiveComplete(bSucceed); }
-
-private:
-	EObjectiveResult CurrentResult;
 
 };

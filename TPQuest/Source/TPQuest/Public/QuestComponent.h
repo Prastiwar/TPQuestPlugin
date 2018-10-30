@@ -19,10 +19,8 @@ public:
 		void AddQuest(UQuest* Quest);
 
 protected:
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Quest)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Quest)
 		TArray<UQuest*> Quests;
-
-	virtual void BeginPlay() override;
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 };

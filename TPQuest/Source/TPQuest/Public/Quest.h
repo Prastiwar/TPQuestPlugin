@@ -13,15 +13,14 @@ class TPQUEST_API UQuest : public UObject
 	GENERATED_BODY()
 
 public:
-	UQuest();
-
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = Quest)
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = Quest)
 		TArray<UObjectiveBehavior*> Objectives;
 
 	UFUNCTION(BlueprintCallable, Category = Quest)
 		void InitObjectives();
 
-	FORCEINLINE bool IsCompleted() const { return bIsCompleted; }
+	UFUNCTION(BlueprintCallable, Category = Quest)
+		bool IsCompleted() const { return bIsCompleted; }
 
 	virtual void Begin();
 

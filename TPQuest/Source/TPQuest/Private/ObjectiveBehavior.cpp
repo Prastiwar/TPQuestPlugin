@@ -9,20 +9,10 @@ UObjectiveBehavior::UObjectiveBehavior()
 	CurrentResult = EObjectiveResult::InProgress;
 }
 
-void UObjectiveBehavior::AddProgress(int32 Progress)
-{
-	CurrentProgress += Progress;
-}
-
-float UObjectiveBehavior::GetNormalizedProgress() const
-{
-	return (float)CurrentProgress / (float)NeededProgress;
-}
-
-void UObjectiveBehavior::Init()
+void UObjectiveBehavior::Begin()
 {
 	CurrentResult = EObjectiveResult::InProgress;
-	ReceiveInit();
+	ReceiveBegin();
 }
 
 void UObjectiveBehavior::Complete(const bool bSucceed)
@@ -34,9 +24,9 @@ void UObjectiveBehavior::Complete(const bool bSucceed)
 EObjectiveResult UObjectiveBehavior::Execute(UQuest* Owner, UQuestComponent* QuestOwner, float DeltaTime)
 {
 	ReceiveExecute(Owner, QuestOwner, DeltaTime);
-	if (CurrentProgress >= NeededProgress)
+	if (CurrentProgress >= NeededProgress && CurrentResult == EObjectiveResult::InProgress)
 	{
-		CurrentResult = EObjectiveResult::Succeed;
+		Complete(true);
 	}
 	return CurrentResult;
 }

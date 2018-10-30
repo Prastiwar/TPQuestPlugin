@@ -17,6 +17,14 @@ public:
 		bEditAfterNew = true;
 	}
 
+	virtual FText GetDisplayName() const override 
+	{
+		FText Text = Super::GetDisplayName();
+		return Text.IsEmpty()
+			? FText::FromName(TEXT("TPQuest Asset"))
+			: Text;
+	}
+
 	virtual UObject* FactoryCreateNew(UClass* InClass, UObject* InParent, FName InName, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn) override
 	{
 		return NewObject<UObject>(InParent, InClass, InName, Flags);

@@ -13,6 +13,14 @@ UTPQuestBlueprintFactory::UTPQuestBlueprintFactory()
 	bEditAfterNew = true;
 }
 
+FText UTPQuestBlueprintFactory::GetDisplayName() const
+{
+	FText Text = Super::GetDisplayName();
+	return Text.IsEmpty()
+		? FText::FromName(TEXT("TPQuest Blueprint"))
+		: Text;
+}
+
 bool UTPQuestBlueprintFactory::ConfigureProperties()
 {
 	ParentClass = nullptr;

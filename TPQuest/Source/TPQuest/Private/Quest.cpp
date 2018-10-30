@@ -3,10 +3,6 @@
 #include "Quest.h"
 #include "ObjectiveBehavior.h"
 
-UQuest::UQuest()
-{
-}
-
 void UQuest::Begin()
 {
 	ReceiveBegin();
@@ -24,8 +20,8 @@ void UQuest::InitObjectives()
 	Objectives.Empty();
 	for (TSubclassOf<UObjectiveBehavior> ObjectiveClass : ObjectiveClasses)
 	{
-		UObjectiveBehavior* Objective = ObjectiveClass->GetDefaultObject<UObjectiveBehavior>();
-		Objective->Init();
+		UObjectiveBehavior* Objective = NewObject<UObjectiveBehavior>(this, *ObjectiveClass);
+		Objective->Begin();
 		Objectives.Add(Objective);
 	}
 }
