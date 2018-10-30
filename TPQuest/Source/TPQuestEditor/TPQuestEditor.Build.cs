@@ -20,10 +20,6 @@ public class TPQuestEditor : ModuleRules
             "CoreUObject", "Engine", "Slate", "SlateCore", "Projects", "UnrealEd", "AssetTools", "TPQuest"
         });
 
-        PublicIncludePaths.AddRange(new string[] {
-
-        });
-
         PrivateIncludePaths.AddRange(new string[]{
             "TPQuestEditor/Private", "TPQuest/Private"
         });

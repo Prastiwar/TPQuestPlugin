@@ -15,7 +15,7 @@ public:
 		FColor Color = FColor(255, 255, 255);
 	}
 
-	virtual FText GetName() const override { return FText::FromName(TEXT("TPQuest Asset")); }
+	virtual FText GetName() const override { return Name; }
 	virtual FText GetAssetDescription(const FAssetData &AssetData) const override { return Description; }
     virtual uint32 GetCategories() override { return FTPQuestEditorModule::GetQuestCategory(); }
     virtual FColor GetTypeColor() const override { return Color; }

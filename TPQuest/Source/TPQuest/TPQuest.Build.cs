@@ -20,10 +20,6 @@ public class TPQuest : ModuleRules
             "CoreUObject", "Engine"
         });
 
-        PublicIncludePaths.AddRange(new string[]{
-
-        });
-
         PrivateIncludePaths.AddRange(new string[]{
             "TPQuest/Private"
         });
