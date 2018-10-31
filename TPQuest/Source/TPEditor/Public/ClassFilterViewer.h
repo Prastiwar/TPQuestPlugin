@@ -1,10 +1,10 @@
-// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
+// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/
 
 #pragma once
 
 #include "Editor/ClassViewer/Public/ClassViewerFilter.h"
 
-class TPQUESTEDITOR_API FClassFilterViewer : public IClassViewerFilter
+class TPEDITOR_API FClassFilterViewer : public IClassViewerFilter
 {
 public:
 	TSet<const UClass*> AllowedChildrenOfClasses;

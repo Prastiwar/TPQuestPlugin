@@ -6,7 +6,7 @@
 	"Description": "Quest framework",
 	"Category": "TPPrastiwar",
 	"CreatedBy": "Tomasz Piowczyk",
-	"CreatedByURL": "https://www.github.com/Prastiwar",
+	"CreatedByURL": "https://www.github.com/Prastiwar/TPQuestPlugin",
 	"DocsURL": "https://github.com/Prastiwar/TPQuestPlugin/wiki",
 	"MarketplaceURL": "",
 	"SupportURL": "",
@@ -18,6 +18,10 @@
 			"Name": "TPQuest",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
+		},		
+		{
+			"Name": "TPEditor",
+			"Type": "Editor"
 		},
 		{
 			"Name": "TPQuestEditor",

@@ -2,13 +2,13 @@
 
 #pragma once
 
-#include "AssetTypeActions_TPQuest.h"
-#include "TPQuestEditor.h"
+#include "AssetTypeActions_TPBase.h"
+#include "TPQuestEditorModule.h"
 #include "Quest.h"
 #include "ObjectiveBehavior.h"
 #include "QuestComponent.h"
 
-class TPQUESTEDITOR_API FQuestFATA : public FAssetTypeActions_TPQuest
+class TPQUESTEDITOR_API FQuestFATA : public FAssetTypeActions_TPBase
 {
 public:
 	FQuestFATA()
@@ -17,10 +17,11 @@ public:
 		Description = FText::FromName(TEXT("Quest Data Asset holds all information about quest and his objectives"));
 		Color = FColor(255, 70, 70);
 		SupportedClass = UQuest::StaticClass();
+		Category = FTPQuestEditorModule::GetQuestCategory();
 	}
 };
 
-class TPQUESTEDITOR_API FObjectiveBehaviorFATA : public FAssetTypeActions_TPQuest
+class TPQUESTEDITOR_API FObjectiveBehaviorFATA : public FAssetTypeActions_TPBase
 {
 public:
 	FObjectiveBehaviorFATA()
@@ -29,10 +30,11 @@ public:
 		Description = FText::FromName(TEXT("Quest Objective(Task) Behavior Blueprint"));
 		Color = FColor(100, 150, 255);
 		SupportedClass = UObjectiveBehavior::StaticClass();
+		Category = FTPQuestEditorModule::GetQuestCategory();
 	}
 };
 
-class TPQUESTEDITOR_API FQuestComponentFATA : public FAssetTypeActions_TPQuest
+class TPQUESTEDITOR_API FQuestComponentFATA : public FAssetTypeActions_TPBase
 {
 public:
 	FQuestComponentFATA()
@@ -41,5 +43,6 @@ public:
 		Description = FText::FromName(TEXT("Quest Component runs objectives from Quest"));
 		Color = FColor(125, 255, 125);
 		SupportedClass = UQuestComponent::StaticClass();
+		Category = FTPQuestEditorModule::GetQuestCategory();
 	}
 };

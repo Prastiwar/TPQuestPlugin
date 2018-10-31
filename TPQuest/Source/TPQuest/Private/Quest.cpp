@@ -1,7 +1,6 @@
 // Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
 
 #include "Quest.h"
-#include "ObjectiveBehavior.h"
 
 void UQuest::Begin()
 {

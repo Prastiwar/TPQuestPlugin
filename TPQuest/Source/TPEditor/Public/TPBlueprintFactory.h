@@ -1,16 +1,16 @@
-// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
+// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/
 
 #pragma once
 
 #include "Factories/BlueprintFactory.h"
-#include "TPQuestBlueprintFactory.generated.h"
+#include "TPBlueprintFactory.generated.h"
 
-UCLASS()
-class TPQUESTEDITOR_API UTPQuestBlueprintFactory : public UBlueprintFactory
+UCLASS(Abstract)
+class TPEDITOR_API UTPBlueprintFactory : public UBlueprintFactory
 {
 	GENERATED_BODY()
 public:
-	UTPQuestBlueprintFactory();
+	UTPBlueprintFactory();
 
 	virtual FText GetDisplayName() const override;
 

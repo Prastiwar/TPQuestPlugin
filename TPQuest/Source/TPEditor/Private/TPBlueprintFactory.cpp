@@ -1,27 +1,27 @@
-// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/TPQuestPlugin
+// Authored by Tomasz Piowczyk. MIT License. Repository: https://github.com/Prastiwar/
 
-#include "TPQuestBlueprintFactory.h"
-#include "TPQuestEditor.h"
+#include "TPBlueprintFactory.h"
+#include "Modules/ModuleManager.h"
 #include "KismetCompilerModule.h"
-#include "KismetEditorUtilities.h"
-#include "Editor/UnrealEd/Public/Kismet2/SClassPickerDialog.h"
+#include "Kismet2/KismetEditorUtilities.h"
 #include "ClassFilterViewer.h"
+#include "Editor/UnrealEd/Public/Kismet2/SClassPickerDialog.h"
 
-UTPQuestBlueprintFactory::UTPQuestBlueprintFactory()
+UTPBlueprintFactory::UTPBlueprintFactory()
 {
 	bCreateNew = true;
 	bEditAfterNew = true;
 }
 
-FText UTPQuestBlueprintFactory::GetDisplayName() const
+FText UTPBlueprintFactory::GetDisplayName() const
 {
 	FText Text = Super::GetDisplayName();
 	return Text.IsEmpty()
-		? FText::FromName(TEXT("TPQuest Blueprint"))
+		? FText::FromName(TEXT("TP Blueprint"))
 		: Text;
 }
 
-bool UTPQuestBlueprintFactory::ConfigureProperties()
+bool UTPBlueprintFactory::ConfigureProperties()
 {
 	ParentClass = nullptr;
 
@@ -42,7 +42,7 @@ bool UTPQuestBlueprintFactory::ConfigureProperties()
 	return bPressedOk;
 }
 
-UObject* UTPQuestBlueprintFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn, FName CallingContext)
+UObject* UTPBlueprintFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn, FName CallingContext)
 {
 	if (ParentClass && FKismetEditorUtilities::CanCreateBlueprintOfClass(ParentClass))
 	{

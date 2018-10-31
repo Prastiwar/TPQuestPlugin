@@ -13,15 +13,15 @@ public class TPQuest : ModuleRules
         bEnforceIWYU = true;
 
         PublicDependencyModuleNames.AddRange(new string[]{
-            "Core", "CoreUObject", "Engine", "AIModule"
+            "Core", "CoreUObject", "Engine"
         });
 
         PrivateDependencyModuleNames.AddRange(new string[]{
             "CoreUObject", "Engine"
         });
 
-        PrivateIncludePaths.AddRange(new string[]{
-            "TPQuest/Private"
+        PrivateIncludePathModuleNames.AddRange(new string[]{
+            "TPQuest"
         });
     }
 }

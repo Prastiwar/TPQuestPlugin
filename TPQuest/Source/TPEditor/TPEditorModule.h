@@ -3,45 +3,43 @@
 #pragma once
 
 #include "Modules/ModuleManager.h"
-#include "TPQuestPrivatePCH.h"
 #include "IAssetTools.h"
 #include "AssetToolsModule.h"
 #include "AssetTypeCategories.h"
-#include "SlateStyle.h"
+#include "Styling/SlateStyle.h"
 
-static EAssetTypeCategories::Type QuestCategory = EAssetTypeCategories::Misc;
+DECLARE_LOG_CATEGORY_EXTERN(TPEditorLog, Log, All);
 
-class FTPQuestEditorModule : public IModuleInterface
+class TPEDITOR_API FTPEditorModule : public IModuleInterface
 {
 
 public:
-	static EAssetTypeCategories::Type GetQuestCategory()
-	{
-		if (QuestCategory == EAssetTypeCategories::Misc)
-		{
-			IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>(TEXT("AssetTools")).Get();
-			QuestCategory = AssetTools.RegisterAdvancedAssetCategory(FName(TEXT("TPQuestCategory")), FText::FromName(TEXT("TPQuest")));
-		}
-		return QuestCategory;
-	}
-
 	// IModuleInterface implementation
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
 	////////////////////////////////////
 
 protected:
+	FName TPStyleName;
+	FString TPPluginName;
 	TSharedPtr<FSlateStyleSet> StyleSet;
+	EAssetTypeCategories::Type TypeCategory = EAssetTypeCategories::Misc;
+
+	virtual void RegisterAllAssetTypeActions() {}
+	virtual void SetAllClassThumbs() {}
+
+	EAssetTypeCategories::Type GetTypeCategory();
+	EAssetTypeCategories::Type RegisterTypeCategory();
 
 	// Set Class Thumbnail - Name is name of icon AND name of class
 	void SetClassThumb(FString Name);
-
+	
 	template<class ObjectType>
 	void RegisterAssetTypeActions(ObjectType* InObject)
 	{
 		IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
-		TSharedRef<IAssetTypeActions> ObjectiveBehaviorATA = MakeShareable(InObject);
-		AssetTools.RegisterAssetTypeActions(ObjectiveBehaviorATA);
+		TSharedRef<IAssetTypeActions> ATA = MakeShareable(InObject);
+		AssetTools.RegisterAssetTypeActions(ATA);
 	}
 
 };

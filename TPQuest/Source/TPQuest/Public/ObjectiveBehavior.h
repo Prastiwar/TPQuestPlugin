@@ -2,11 +2,12 @@
 
 #pragma once
 
-#include "Object.h"
+#include "UObject/Object.h"
+#include "QuestComponent.h"
 #include "ObjectiveBehavior.generated.h"
 
 class UQuest;
-class UQuestComponent;
+//class UQuestComponent;
 
 UENUM(BlueprintType)
 enum class EObjectiveResult : uint8

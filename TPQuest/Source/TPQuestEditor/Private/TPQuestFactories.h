@@ -2,12 +2,14 @@
 
 #pragma once
 
-#include "AssetTypeActions.h"
-#include "TPQuestBlueprintFactory.h"
+#include "Quest.h"
+#include "ObjectiveBehavior.h"
+#include "QuestComponent.h"
+#include "TPBlueprintFactory.h"
 #include "TPQuestFactories.generated.h"
 
 UCLASS()
-class TPQUESTEDITOR_API UQuestFactory : public UTPQuestBlueprintFactory
+class TPQUESTEDITOR_API UQuestFactory : public UTPBlueprintFactory
 {
 	GENERATED_BODY()
 
@@ -20,7 +22,7 @@ public:
 };
 
 UCLASS()
-class TPQUESTEDITOR_API UObjectiveFactory : public UTPQuestBlueprintFactory
+class TPQUESTEDITOR_API UObjectiveFactory : public UTPBlueprintFactory
 {
 	GENERATED_BODY()
 
@@ -33,7 +35,7 @@ public:
 };
 
 UCLASS()
-class TPQUESTEDITOR_API UQuestComponentFactory : public UTPQuestBlueprintFactory
+class TPQUESTEDITOR_API UQuestComponentFactory : public UTPBlueprintFactory
 {
 	GENERATED_BODY()
 

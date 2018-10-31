@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class TPQuestEditor : ModuleRules
+public class TPEditor : ModuleRules
 {
-    public TPQuestEditor(ReadOnlyTargetRules Target) : base(Target)
+    public TPEditor(ReadOnlyTargetRules Target) : base(Target)
     {
         MinFilesUsingPrecompiledHeaderOverride = 1;
         bFasterWithoutUnity = true;
@@ -13,15 +13,15 @@ public class TPQuestEditor : ModuleRules
         bEnforceIWYU = true;
 
         PublicDependencyModuleNames.AddRange(new string[]{
-            "Core", "CoreUObject", "Engine", "UnrealEd", "TPEditor", "TPQuest"
+            "Core", "CoreUObject", "Engine", "AssetTools", "Slate", "ClassViewer", "UnrealEd", "Kismet", "KismetCompiler"
         });
 
         PrivateDependencyModuleNames.AddRange(new string[]{
-            "CoreUObject", "Engine", "UnrealEd", "TPEditor", "TPQuest"
+            "CoreUObject", "Engine", "Projects", "AssetTools", "Slate", "SlateCore", "UnrealEd", "Kismet", "KismetCompiler"
         });
 
         PrivateIncludePathModuleNames.AddRange(new string[]{
-            "TPQuestEditor", "TPEditor", "TPQuest"
+            "TPEditor"
         });
     }
 }
